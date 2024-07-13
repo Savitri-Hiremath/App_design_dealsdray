@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "480406645971",
+    "project_id": "deals-280e1",
+    "storage_bucket": "deals-280e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480406645971:android:f7dc8c00a2c686c6d43826",
+        "android_client_info": {
+          "package_name": "com.example.flutter_design"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVoIabBLLcAKFfmMaPzIJzeW6xVG4EJh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
