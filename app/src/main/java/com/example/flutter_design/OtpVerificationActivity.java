@@ -31,10 +31,8 @@ public class OtpVerificationActivity extends AppCompatActivity {
         buttonVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    Intent intent = new Intent(OtpVerificationActivity.this, MainActivity.class);
-                    startActivity(intent);
-                               }
+                verifyOtp();
+            }
         });
 
         buttonSendAgain.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +43,21 @@ public class OtpVerificationActivity extends AppCompatActivity {
                 Toast.makeText(OtpVerificationActivity.this, "OTP sent again", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void verifyOtp() {
+        String enteredOtp = editTextOTP.getText().toString().trim();
+        String storedOtp = databaseHelper.getOtp(phoneNumber);
+
+        if (storedOtp != null && storedOtp.equals(enteredOtp)) {
+            // OTP matches, navigate to MainActivity
+            Intent intent = new Intent(OtpVerificationActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            // OTP does not match, show error message
+            Toast.makeText(this, "Invalid OTP. Please try again.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private String generateNewOtp() {

@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS +
                 "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COLUMN_PHONE + " TEXT UNIQUE," +  // Ensure phone numbers are unique
+                COLUMN_PHONE + " TEXT UNIQUE," +
                 COLUMN_PASSWORD + " TEXT," +
                 COLUMN_REFERRAL_CODE + " TEXT," +
                 COLUMN_OTP + " varchar(20)" +
@@ -60,6 +60,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_USERS, values, COLUMN_PHONE + "=?", new String[]{phoneNumber});
         db.close();
     }
-
-
+    public String getOtp(String phoneNumber) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS, new String[]{COLUMN_OTP}, COLUMN_PHONE + "=?",
+                new String[]{phoneNumber}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            int otpColumnIndex = cursor.getColumnIndex(COLUMN_OTP);
+            if (otpColumnIndex != -1) {
+                String otp = cursor.getString(otpColumnIndex);
+                cursor.close();
+                return otp;
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return null;
+    }
 }

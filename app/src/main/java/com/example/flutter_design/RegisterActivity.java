@@ -27,10 +27,10 @@ public class RegisterActivity extends AppCompatActivity {
         editTextReferralCode = findViewById(R.id.editTextText2);
         imageButtonRegister = findViewById(R.id.imageButton2);
 
-        // Initialize database helper
+
         databaseHelper = new DatabaseHelper(this);
 
-        // Handle register button click
+
         imageButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,14 +40,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-        // Get input values
+
         String phone = editTextPhone.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         String referralCode = editTextReferralCode.getText().toString().trim();
 
-        // Validate input (you may add more validation logic here)
-
-        // Insert user data into database
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("phone", phone);
@@ -57,10 +54,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (newRowId != -1) {
             Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show();
-            // Navigate to MainActivity
+
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
-            finish(); // Close the current activity
+            finish();
         } else {
             Toast.makeText(this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
         }
